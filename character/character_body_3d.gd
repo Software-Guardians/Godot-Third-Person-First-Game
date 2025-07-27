@@ -20,6 +20,7 @@ func _input(event: InputEvent) -> void:
 		camera_3d_controller.rotate_x(deg_to_rad(-event.relative.y*sens))
 		camera_3d_controller.rotation.x=clamp(camera_3d_controller.rotation.x,deg_to_rad(-20),deg_to_rad(20))
 
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y-=gravity*delta
@@ -27,22 +28,16 @@ func _physics_process(delta: float) -> void:
 		velocity.y=jump_velocity
 	var input_dir=Input.get_vector(&"walk-right",&"walk-left",&"walk-back",&"walk-front")
 	var direction=(transform.basis*Vector3(input_dir.x,0,input_dir.y)).normalized()
-	if Input.is_action_pressed(&"walk-right"):
-		target_character_rotation_y=deg_to_rad(-30)
+	target_character_rotation_y=(Input.get_action_strength(&"walk-left")-Input.get_action_strength(&"walk-right"))
+	if Input.is_action_pressed(&"walk-back") or Input.is_action_pressed(&"walk-front"):
+		target_character_rotation_y*=0.5
 		animation_player.play(&"walk")
-	elif Input.is_action_pressed(&"walk-left"):
-		target_character_rotation_y=deg_to_rad(30)
+	if target_character_rotation_y!=0:
 		animation_player.play(&"walk")
-	elif Input.is_action_pressed(&"walk-front"):
-		animation_player.play(&"walk")
-	elif Input.is_action_pressed(&"walk-back"):
-		animation_player.play(&"walk")
-		
-	else:
-		target_character_rotation_y=deg_to_rad(0)
+	elif input_dir.x==0 and input_dir.y==0:
 		animation_player.play(&"idle")
-	
-	
+	target_character_rotation_y=deg_to_rad(target_character_rotation_y*30)
+
 	character.rotation.y=lerp_angle(character.rotation.y,target_character_rotation_y,rotation_speed)
 	
 	if direction:
