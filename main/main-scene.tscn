@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvtxp6v4kasrg"]
+[gd_scene load_steps=6 format=3 uid="uid://bvtxp6v4kasrg"]
 
 [ext_resource type="Script" uid="uid://cefv570bywcs7" path="res://main/main_scene.gd" id="1_3yjtq"]
 [ext_resource type="PackedScene" uid="uid://dahokxbt41fsu" path="res://scenes/world.tscn" id="1_ddwaq"]
 [ext_resource type="PackedScene" uid="uid://buk5fevf51okc" path="res://character/character-male-d.tscn" id="2_3yjtq"]
+[ext_resource type="PackedScene" uid="uid://bdcmic2marajw" path="res://scenes/user-interface/UIMain.tscn" id="4_184dl"]
+[ext_resource type="PackedScene" uid="uid://40dwfa351q1t" path="res://scenes/user-interface/UIGame.tscn" id="5_e6dp0"]
 
 [node name="Main-scene" type="Node3D"]
 script = ExtResource("1_3yjtq")
@@ -18,4 +20,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0247414, 0.524094, 1.3107)
 wait_time = 2.0
 autostart = true
 
+[node name="UiMain" parent="." instance=ExtResource("4_184dl")]
+
+[node name="MenuCanvasLayer" parent="UiMain/Control" index="0"]
+visible = false
+
+[node name="ButtonRestart" parent="UiMain/Control/MenuCanvasLayer/VBoxContainer" index="0"]
+visible = false
+
+[node name="ButtonPause" parent="UiMain/Control/MenuCanvasLayer/VBoxContainer" index="1"]
+visible = false
+
+[node name="UiGame" parent="." instance=ExtResource("5_e6dp0")]
+
+[node name="GameCanvasLayer" parent="UiGame" index="0"]
+visible = false
+
 [connection signal="timeout" from="ballTimer" to="." method="_on_ball_timer_timeout"]
+
+[editable path="UiMain"]
+[editable path="UiGame"]

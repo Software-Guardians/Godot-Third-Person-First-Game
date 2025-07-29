@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://40dwfa351q1t"]
+
+[node name="UiGame" type="Node2D"]
+
+[node name="GameCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LabelScore" type="Label" parent="GameCanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.796078, 0.678431, 0.584314, 1)
+theme_override_colors/font_shadow_color = Color(0.187419, 3.7542e-05, 0.695821, 1)
+theme_override_font_sizes/font_size = 75
+text = "Kicked Balls:"
+
+[node name="LabelTime" type="Label" parent="GameCanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -334.0
+offset_bottom = 103.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.795301, 0.680116, 0.583144, 1)
+theme_override_colors/font_shadow_color = Color(0.188235, 0, 0.694118, 1)
+theme_override_font_sizes/font_size = 75
+text = "Time:"
+
+[node name="ButtonMenu" type="Button" parent="GameCanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -116.5
+offset_right = 116.5
+offset_bottom = 111.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 75
+text = "MENU"

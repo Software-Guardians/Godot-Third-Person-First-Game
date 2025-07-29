@@ -2,13 +2,26 @@ extends Node3D
 @onready var ball:PackedScene=preload("res://objects/ball.tscn") 
 @onready var character: Node3D = $"Character-male-d"
 @onready var balls: Node3D = $balls
+@onready var score_label: Label = $ScoreLabel
+@onready var menu_canvas_layer: CanvasLayer = $UiMain/Control/MenuCanvasLayer
+@onready var button_restart: Button = $UiMain/Control/MenuCanvasLayer/VBoxContainer/ButtonRestart
+@onready var game_canvas_layer: CanvasLayer = $UiGame/GameCanvasLayer
+@onready var label_score: Label = $UiGame/GameCanvasLayer/LabelScore
+@onready var label_time: Label = $UiGame/GameCanvasLayer/LabelTime
+
+
 @export var ball_position_list:=[]
 
 func _ready() -> void:
 	print("başladı")
 
-
-
+func _process(_delta: float) -> void:
+	if GameManager.last_kicked_ball!=null:
+		GameManager.last_kicked_ball.queue_free()
+	if game_canvas_layer.visible:
+		label_score.text="Kicked Balls: "+ str(GameManager.kicked_ball_number) 
+		label_time.text="Time: "+ str(GameManager.kicked_ball_number) 
+		
 func ball_create():
 	while true:
 		if ball_position_list.size()==10:
