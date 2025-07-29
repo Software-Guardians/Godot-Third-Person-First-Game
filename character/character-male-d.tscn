@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://buk5fevf51okc"]
+[gd_scene load_steps=6 format=3 uid="uid://buk5fevf51okc"]
 
 [ext_resource type="Script" uid="uid://b2aablvmt7iwf" path="res://character/character_body_3d.gd" id="1_in3x8"]
 [ext_resource type="PackedScene" uid="uid://bo5sclgfb0lee" path="res://assets/kenney_mini-characters(1)/Models/GLB format/character-male-d.glb" id="1_l5175"]
 [ext_resource type="Script" uid="uid://du2pgpo0qur5e" path="res://character/camera_3d.gd" id="3_nktb5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nktb5"]
+size = Vector3(0.6, 0.4, 0.6)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l5175"]
 size = Vector3(0.5, 0.661758, 0.232178)
@@ -18,6 +21,18 @@ script = ExtResource("1_in3x8")
 bones/4/rotation = Quaternion(0, 0, -0.382683, 0.92388)
 bones/5/rotation = Quaternion(0, 0, 0.382683, 0.92388)
 
+[node name="KickTimer" type="Timer" parent="CharacterBody3D/character"]
+wait_time = 0.4
+one_shot = true
+
+[node name="KickableArea" type="Area3D" parent="CharacterBody3D/character"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/character/KickableArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.2)
+shape = SubResource("BoxShape3D_nktb5")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0112612, 0.333155, -0.0118583)
 shape = SubResource("BoxShape3D_l5175")
@@ -31,5 +46,7 @@ spring_length = 2.0
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Camera3DController/SpringArm3D"]
 fov = 51.8
 script = ExtResource("3_nktb5")
+
+[connection signal="timeout" from="CharacterBody3D/character/KickTimer" to="CharacterBody3D" method="_on_timer_timeout"]
 
 [editable path="CharacterBody3D/character"]

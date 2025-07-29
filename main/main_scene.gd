@@ -28,13 +28,13 @@ func ball_create():
 		var control:bool=((character_position.x>=ball_approximately_position["x_down"])and (character_position.x<=ball_approximately_position["x_up"]) and (character_position.z>=ball_approximately_position["z_down"])and (character_position.z<=ball_approximately_position["z_up"]))
 		if not control:
 			var ball_instance=ball.instantiate()
-			ball_instance.global_position=ball_absolute_position
 			balls.add_child(ball_instance)
+			ball_instance.global_position=ball_absolute_position
+
 			ball_position_list.append(ball_absolute_position)
-			print("eklendi")
 			break
 		else :
-			print("eklenemedi")
+
 			continue
 
 
