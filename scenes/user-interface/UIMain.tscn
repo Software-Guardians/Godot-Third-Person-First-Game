@@ -28,20 +28,20 @@ offset_bottom = 29.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ButtonRestart" type="Button" parent="Control/MenuCanvasLayer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 75
-text = "RESTART"
-
-[node name="ButtonPause" type="Button" parent="Control/MenuCanvasLayer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 75
-text = "PAUSE"
-
 [node name="ButtonPlay" type="Button" parent="Control/MenuCanvasLayer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 75
 text = "PLAY"
+
+[node name="ButtonResume" type="Button" parent="Control/MenuCanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "RESUME"
+
+[node name="ButtonRestart" type="Button" parent="Control/MenuCanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "RESTART"
 
 [node name="ButtonExit" type="Button" parent="Control/MenuCanvasLayer/VBoxContainer"]
 layout_mode = 2

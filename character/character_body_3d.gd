@@ -7,6 +7,8 @@ extends CharacterBody3D
 
 
 
+
+
 @export var kick_cooldown:=true
 @export var sens:=0.05
 @export var speed:=10
@@ -14,16 +16,46 @@ extends CharacterBody3D
 @export var gravity:=30
 @export var jump_velocity:=10
 @export var kick_strength:=1
-
-
+@export var character_default_location:Vector3=Vector3(-0.02,0.524,1.311)
+@export var character_default_rotation:Vector3=Vector3(0,0,0)
 var input_dir:Vector2=Vector2.ZERO
 var target_character_rotation_y:float=0.0
 
 
-func _ready() -> void:
+func _ready() -> void:	
+	set_physics_process(false)
+	set_process_input(false)
+	GameManager.game_start.connect(game_started)
+	GameManager.game_paused.connect(game_paused)
+	GameManager.game_stoped.connect(game_stoped)
+	GameManager.game_resumed.connect(game_resumed)
+	
+func game_started():
 	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+	set_physics_process(true)
+	set_process_input(true)
+	self.global_position=character_default_location
+	self.global_rotation=character_default_rotation
+func game_resumed():
+	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+	set_physics_process(true)
+	set_process_input(true)
+	
+func game_paused():
+	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+	set_physics_process(false)
+	set_process_input(false)
+	
+func game_stoped():
+	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+	set_physics_process(false)
+	set_process_input(false)
+
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"quit-game"):
+		GameManager.pause_game()
+
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x*sens))
 		camera_3d_controller.rotate_x(deg_to_rad(-event.relative.y*sens))
@@ -94,3 +126,4 @@ func kick_ball(ball: RigidBody3D):
 	var impulse = direction * kick_strength
 	ball.apply_central_impulse(impulse)
 	GameManager.add_kicked_ball(ball)
+	

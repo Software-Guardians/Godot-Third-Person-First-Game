@@ -18,17 +18,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0247414, 0.524094, 1.3107)
 
 [node name="ballTimer" type="Timer" parent="."]
 wait_time = 2.0
-autostart = true
 
 [node name="UiMain" parent="." instance=ExtResource("4_184dl")]
 
-[node name="MenuCanvasLayer" parent="UiMain/Control" index="0"]
+[node name="ButtonResume" parent="UiMain/Control/MenuCanvasLayer/VBoxContainer" index="1"]
 visible = false
 
-[node name="ButtonRestart" parent="UiMain/Control/MenuCanvasLayer/VBoxContainer" index="0"]
-visible = false
-
-[node name="ButtonPause" parent="UiMain/Control/MenuCanvasLayer/VBoxContainer" index="1"]
+[node name="ButtonRestart" parent="UiMain/Control/MenuCanvasLayer/VBoxContainer" index="2"]
 visible = false
 
 [node name="UiGame" parent="." instance=ExtResource("5_e6dp0")]
@@ -36,7 +32,14 @@ visible = false
 [node name="GameCanvasLayer" parent="UiGame" index="0"]
 visible = false
 
+[node name="MainTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="ballTimer" to="." method="_on_ball_timer_timeout"]
+[connection signal="pressed" from="UiMain/Control/MenuCanvasLayer/VBoxContainer/ButtonPlay" to="." method="_on_button_play_pressed"]
+[connection signal="pressed" from="UiMain/Control/MenuCanvasLayer/VBoxContainer/ButtonResume" to="." method="_on_button_resume_pressed"]
+[connection signal="pressed" from="UiMain/Control/MenuCanvasLayer/VBoxContainer/ButtonRestart" to="." method="_on_button_restart_pressed"]
+[connection signal="pressed" from="UiMain/Control/MenuCanvasLayer/VBoxContainer/ButtonExit" to="." method="_on_button_exit_pressed"]
+[connection signal="timeout" from="MainTimer" to="." method="_on_main_timer_timeout"]
 
 [editable path="UiMain"]
 [editable path="UiGame"]
