@@ -15,7 +15,8 @@ Includes smooth movement, camera control, and a ball kicking mechanic — ideal 
 - Ball kicking mechanic:  
   - Collision detection with `get_overlapping_bodies()`  
   - Direction calculation using angle and vector math  
-  - Physical impulse applied with `apply_central_impulse()`
+  - Physical impulse applied with `apply_central_impulse()`  
+  - Kick action triggered by **left mouse button**
 
 ---
 
@@ -41,7 +42,8 @@ You can also download it directly from the link below:
 
 1. Open the project with Godot Engine 4.x  
 2. Run the `Main.tscn` scene  
-3. Move the character with `W`, `A`, `S`, `D` keys and control the camera with the mouse
+3. Move the character with `W`, `A`, `S`, `D` keys and control the camera with the mouse  
+4. Kick the ball using the **left mouse button**
 
 ---
 
