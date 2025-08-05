@@ -18,33 +18,35 @@ const GAME_OVER_SCENE = preload("res://scenes/user-interface/gameOverScene.tscn"
 @export var ball_position_list:=[]
 
 func _ready() -> void:
-	print("başladı")
 	GameManager.game_start.connect(game_started)
 	GameManager.game_paused.connect(is_paused)
 	GameManager.game_stoped.connect(is_stoped)
 	GameManager.ball_remove.connect(ball_remove)
 	GameManager.ball_kicked.connect(add_ball_to_label)
 func game_started():
+	ball_position_list.clear()
 	GameManager.is_game_active=true
 	game_canvas_layer.visible=true
 	menu_canvas_layer.visible=false
+	GameManager.kicked_ball_number=0
 	label_score.text="Kicked Balls: "+ str(GameManager.kicked_ball_number) 
 	label_time.text="Time: "+ str(GameManager.default_Time) 
 	for ball in balls.get_children():
-		balls.remove_child(ball)
 		ball.queue_free()
 func ball_remove():
+	
+	ball_position_list.erase(GameManager.last_kicked_ball.ball_first_position)
 	GameManager.last_kicked_ball.queue_free()
 func add_ball_to_label():
 	label_score.text="Kicked Balls: "+ str(GameManager.kicked_ball_number) 
 
 func ball_create():
 	while GameManager.is_game_active:
+		print(str(ball_position_list.size()) )
 		if ball_position_list.size()==10:
 			break
 		var ball_absolute_position:=Vector3(randi_range(-22,22),2,randi_range(-22,22))
 		if ball_position_list.has(ball_absolute_position):
-			print("aynı toptan var")
 			continue
 		
 		var ball_approximately_position:={
@@ -57,10 +59,12 @@ func ball_create():
 		var control:bool=((character_position.x>=ball_approximately_position["x_down"])and (character_position.x<=ball_approximately_position["x_up"]) and (character_position.z>=ball_approximately_position["z_down"])and (character_position.z<=ball_approximately_position["z_up"]))
 		if not control:
 			var ball_instance=ball.instantiate()
+			ball_instance.ball_first_position=ball_absolute_position
 			balls.add_child(ball_instance)
 			ball_instance.global_position=ball_absolute_position
 
-			ball_position_list.append(ball_absolute_position)
+			ball_position_list.append(ball_absolute_position)		
+
 			break
 		else :
 
@@ -88,13 +92,16 @@ func is_paused() -> void:
 	button_play.visible=false
 	button_resume.visible=true
 	main_timer.paused=true
-func _on_button_restart_pressed() -> void:
+func _on_button_restart_pressed() -> void:	
+
 	GameManager.start_game()
 	ball_timer.start()
 	GameManager.is_game_active=true
 	ball_timer.paused=false
 	main_timer.start()
 	main_timer.paused=false
+
+
 func _on_button_resume_pressed() -> void:
 	ball_timer.paused=false
 	GameManager.resume_game()
@@ -124,3 +131,4 @@ func is_stoped():
 	button_play.visible=false
 	button_resume.visible=false
 	main_timer.paused=true
+	my_window.ball_label.text="TOTAL KICKED BALL: "+str(GameManager.kicked_ball_number) 

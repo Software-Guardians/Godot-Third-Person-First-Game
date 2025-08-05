@@ -1,4 +1,5 @@
 extends Window
+@onready var ball_label: Label = $VBoxContainer/BallLabel
 
 func _ready() -> void:
 	GameManager.game_stoped.connect(game_over)

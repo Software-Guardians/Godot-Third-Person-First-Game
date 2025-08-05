@@ -125,5 +125,5 @@ func kick_ball(ball: RigidBody3D):
 	direction = direction.normalized()
 	var impulse = direction * kick_strength
 	ball.apply_central_impulse(impulse)
-	GameManager.add_kicked_ball(ball)
+	GameManager.add_kicked_ball(ball,self)
 	
