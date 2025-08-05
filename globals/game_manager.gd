@@ -1,6 +1,6 @@
 extends Node
 var kicked_ball_number:=0
-var default_Time=10
+var default_Time=50
 var time=5
 
 var last_kicked_ball:RigidBody3D
