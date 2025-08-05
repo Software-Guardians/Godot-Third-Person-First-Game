@@ -1,4 +1,11 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+<<<<<<< HEAD
 build/
+=======
+*.exe
+*.x86_64
+*.x86_32
+
+>>>>>>> c2ffd41 (Örnek video mp4 formatına çevrildi.)
