@@ -4,7 +4,16 @@ A simple and flexible third-person character controller built with **Godot Engin
 Includes smooth movement, camera control, and a ball kicking mechanic — ideal for 3D game prototypes.
 
 ---
+## 🎥 Demo Video
 
+<video width="640" height="360" controls autoplay muted loop>
+  <source src="main-video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+A demo video showcasing the gameplay and mechanics.
+
+---
 ## 🌟 Features
 
 - Character movement using `W`, `A`, `S`, `D` keys  
@@ -27,6 +36,8 @@ Includes smooth movement, camera control, and a ball kicking mechanic — ideal 
 - After a few seconds post-hit, the ball disappears.
 
 ---
+
+
 
 ## 🛠 Getting Started
 
