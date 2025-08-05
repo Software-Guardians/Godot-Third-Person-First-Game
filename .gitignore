@@ -7,5 +7,5 @@ build/
 *.exe
 *.x86_64
 *.x86_32
-
+.venv/
 >>>>>>> c2ffd41 (Örnek video mp4 formatına çevrildi.)
